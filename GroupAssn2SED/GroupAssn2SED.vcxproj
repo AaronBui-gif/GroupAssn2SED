@@ -141,11 +141,17 @@
   <ItemGroup>
     <ClCompile Include="Account.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="ItemList.cpp" />
     <ClCompile Include="VideoStore.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Account.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="ItemList.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="customers.txt" />
+    <Text Include="items.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

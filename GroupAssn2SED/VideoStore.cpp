@@ -5,16 +5,97 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <sstream>
+#include <vector>
+#include "Item.h"
 
 using namespace std;
 
+bool isNumber(const string& num);
+bool getDatas(string filename, Item item1, string filename2);
 void printMenu();
 void getOption();
 
 /*** MAIN FUNCTION ***/
 int main(int argc, char* argv[]) {
+    /*** Declare variables ***/
+    Item item1;
+    if (argc != 3) {
+        cout << "Must contain 3 arguments" << endl;
+        return -1;
+    }
+
+    string filename1 = argv[1];
+    string filename2 = argv[2];
+
+    bool checkFile = getDatas(filename1, item1, filename2);
+    if (checkFile == false) {
+        return -1;
+    }
+
+
     printMenu();
     getOption();
+}
+
+/*** FUNCTION to check if a number ***/
+bool isNumber(string& num) {
+    string::const_iterator it = num.begin();
+    while (it != num.end() && isdigit(*it)) ++it;
+    return !num.empty() && it == num.end();
+}
+
+/***  FUNCTION to  get datas from file txt ***/
+bool getDatas(string filename, Item item1, string filename2) {
+    string RECORD = "Record";
+    string DVD = "DVD";
+    int count = 0;
+    vector<string>::iterator i;
+    vector< vector<string>> data;
+    ifstream inFile1(filename, ios::in | ios::binary);
+    ifstream inFile2(filename2, ios::in | ios::binary);
+    if (!inFile1) {
+        cerr << "Cannot open file" << endl;
+        return false;
+    }
+    else if (!inFile2) {
+        cerr << "Cannot open file" << endl;
+        return false;
+    }
+    while (inFile2){
+        string s;
+        if (!getline(inFile1, s)) break;
+        cout << s << endl;
+        istringstream stringstream(s);
+        vector<string> record;
+
+        while (stringstream) {
+            string word;
+            if (!getline(stringstream, word, ',')) {
+                count++;
+                if (count == 4) {
+                    if (word == RECORD) {
+                        
+                    }
+                    else if (word == DVD) {
+
+                    }
+                }
+                break;
+            }
+            record.push_back(word);
+
+            //cout << word << endl;
+        }
+        for (i = record.begin(); i < record.end(); i++)
+        {
+            cout << "i:" << *i << endl;
+        }
+    
+        data.push_back(record);
+ 
+    }
+    return true;
 }
 
 /*** FUNCTION to print out menu ***/
@@ -39,46 +120,48 @@ void printMenu() {
 void getOption() {
     // Declare variables
     string input;
+    int num{};
     do {
-        getline(cin, input);
-        if (input.compare("1")) {
+        cin >> input;
+        if (isNumber(input) == true) {
+           num= stoi(input);
+        }
+        if (input == "1") {
+            cout << "1" << endl;
+        }
+        else if (input == "2") {
 
         }
-        else if (input.compare("1")) {
+        else if (input == "3") {
 
         }
-        else if (input.compare("2")) {
+        else if (input == "4") {
 
         }
-        else if (input.compare("3")) {
+        else if (input == "5") {
 
         }
-        else if (input.compare("4")) {
+        else if (input == "6") {
 
         }
-        else if (input.compare("5")) {
+        else if (input == "7") {
 
         }
-        else if (input.compare("6")) {
+        else if (input == "8") {
 
         }
-        else if (input.compare("7")) {
+        else if (input == "9") {
 
         }
-        else if (input.compare("8")) {
+        else if (input == "10") {
 
         }
-        else if (input.compare("9")) {
-
-        }
-        else if (input.compare("Exit")) {
+        else if (input == "Exit" || input == "exit") {
             cout << "Closing Genie's video store app" << endl;
             cout << "Good Bye" << endl;
-            cout << "******************************" << endl;
+            cout << "*********************************************************************************************************" << endl;
+            break;
         }
-        else {
-            cout << "User's input is invalid" << endl;
-            cout << "Please enter again" << endl;
-        }
-    } while (input < "1" && input > "10");
+    } while (num < 1 && num > 10);
 }
+
