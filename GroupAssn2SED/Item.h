@@ -5,33 +5,45 @@
 #ifndef TESTING_ITEM_H
 #define TESTING_ITEM_H
 
+#include <iostream>
+#include <string>
+enum Type;
+enum Status;
+enum Genre;
+
+using namespace std;
 
 class Item {
-private:
+public:
     int id;
     string title;
-    string rentType;
+    Type rentType;
     string loanType;
     int numberOfCopies;
     float fee;
-    string genre;
-public:
+    Genre genre;
+    Status status;
+
+    Item();
+    Item(int id, string title, Type rentType, string loanType, int numberOfCopies, float fee, Genre genre, Status status);
+    ~Item();
     int getID();
     string getTitle();
-    string getRentType();
+    Type getRentType();
     string getLoanType();
     int getNumberOfCopies();
     float getFee();
-    string getGenre();
+    Genre getGenre();
+    Status getStatus();
 
     void setID(int id);
     void setTitle(string title);
-    void setRentType(string rentType);
+    void setRentType(Type rentType);
     void setLoanType(string loanType);
     void setNumberOfCopies(int numberOfCopies);
     void setFee(float fee);
-    void setGenre(string genre);
-
+    void setGenre(Genre genre);
+    void setStatus(Status status);
 };
 
 

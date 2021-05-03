@@ -8,6 +8,9 @@
 
 using namespace std;
 
+void printMenu();
+void getOption();
+
 /*** MAIN FUNCTION ***/
 int main(int argc, char* argv[]) {
     printMenu();
