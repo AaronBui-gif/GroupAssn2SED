@@ -10,72 +10,110 @@ using namespace std;
 
 class Account {
 protected:
-    int id;
+    string id;
     string name;
     string address;
     string phoneNumber;
-    int listOfRentals;
+    string listOfRentals;
 public:
     Account();
-    Account(int id, string name, string address, string phone, int listOfRentals);
+    Account(string id, string name, string address, string phone, string listOfRentals);
 
     ~Account();
 
     // Getter Functions
-    int getID();
+    string getID();
     string getName();
     string getAddress();
     string getPhoneNumber();
-    int getListOfRentals();
+    string getListOfRentals();
 
     // Setter Functions
-    void setID();
-    void setName();
-    void setAddress();
-    void setPhoneNumber();
-    void setListOfRentals();
+    void setID(string id);
+    void setName(string name);
+    void setAddress(string address);
+    void setPhoneNumber(string phoneNumber);
+    void setListOfRentals(string listOfRentals);
 
     //Function 
 };
 
 class GuessAccount :public Account {
 protected:
-    int id;
+    string id;
     string name;
     string address;
     string phoneNumber;
-    int listOfRentals;
+    string listOfRentals;
 public:
     GuessAccount();
-    GuessAccount(int id, string name, string address, string phoneNumber, int listOfRentals);
+    GuessAccount(string id, string name, string address, string phoneNumber, string listOfRentals);
     ~GuessAccount();
+    string getID();
+    string getName();
+    string getAddress();
+    string getPhoneNumber();
+    string getListOfRentals();
+
+    // Setter Functions
+    void setID(string id);
+    void setName(string name);
+    void setAddress(string address);
+    void setPhoneNumber(string phoneNumber);
+    void setListOfRentals(string listOfRentals);
 };
 
 // class RegularAccount inherits from class Account
 class RegularAccount :public Account {
 protected:
-    int id = 0;
+    string id = 0;
     string name = "";
     string address = "";
     string phoneNumber = "";
-    int listOfRentals = 0;
+    string listOfRentals = 0;
 public:
     RegularAccount();
-    RegularAccount(int id, string name, string address, string phoneNumber, int listOfRentals);
+    RegularAccount(string id, string name, string address, string phoneNumber, string listOfRentals);
     ~RegularAccount();
+
+    string getID();
+    string getName();
+    string getAddress();
+    string getPhoneNumber();
+    string getListOfRentals();
+
+    // Setter Functions
+    void setID(string id);
+    void setName(string name);
+    void setAddress(string address);
+    void setPhoneNumber(string phoneNumber);
+    void setListOfRentals(string listOfRentals);
 };
 
 // class VipAccount inherits from class Account
 class VipAccount :public Account {
 protected:
-    int id = 0;
+    string id = 0;
     string name = "";
     string address = "";
     string phoneNumber = "";
-    int listOfRentals = 0;
+    string listOfRentals = 0;
 public:
     VipAccount();
-    VipAccount(int id, string name, string address, string phoneNumber, int listOfRentals);
+    VipAccount(string id, string name, string address, string phoneNumber, string listOfRentals);
     ~VipAccount();
+
+    string getID();
+    string getName();
+    string getAddress();
+    string getPhoneNumber();
+    string getListOfRentals();
+
+    // Setter Functions
+    void setID(string id);
+    void setName(string name);
+    void setAddress(string address);
+    void setPhoneNumber(string phoneNumber);
+    void setListOfRentals(string listOfRentals);
 };
 #endif //TESTING_ACCOUNT_H

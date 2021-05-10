@@ -3,35 +3,19 @@
 // Created by Huy Bui Thanh on 27/04/2021.
 //
 
-#include "C:\Users\17R4\source\repos\GroupAssn2SED\GroupAssn2SED\Item.h"
+#include "Item.h"
 #include<iostream>
 #include<string>
 
 using namespace std;
 
-enum Status {
-    AVAILABLE,
-    BORROWED
-};
-
-enum Type {
-    Record,
-    DVD,
-    Game
-};
-
-enum Genre {
-    Action,
-    Horror,
-    Drama,
-    Comedy
-};
 
 Item::Item() {
 
 }
 
-Item::Item (int id, string title, Type rentType, string loanType, int numberOfCopies, float fee, Genre genre, Status status) {
+//
+Item::Item (string id, string title, Type rentType, string loanType, int numberOfCopies, float fee, Genre genre) {
 
     this->id = id;
     this->title = title;
@@ -40,12 +24,23 @@ Item::Item (int id, string title, Type rentType, string loanType, int numberOfCo
     this->numberOfCopies = numberOfCopies;
     this->fee = fee;
     this->genre = genre;
-    this->status = status;
+    this->status = Status::AVAILABLE;
+}
+
+Item::Item(string id, string title, Type rentType, string loanType, int numberOfCopies, float fee) {
+
+    this->id = id;
+    this->title = title;
+    this->rentType = rentType;
+    this->loanType = loanType;
+    this->numberOfCopies = numberOfCopies;
+    this->fee = fee;
+    this->status = Status::AVAILABLE;
 }
 
 Item::~Item(){}
     /*** GETTER ***/
-    int Item::getID() { return this->id; }
+    string Item::getID() { return this->id; }
     string Item::getTitle() { return this->title; }
     Type Item::getRentType() { return rentType; }
     string Item::getLoanType() { return loanType; }
@@ -55,7 +50,7 @@ Item::~Item(){}
     Status Item::getStatus() { return status; }
 
     /*** SETTER ***/
-    void Item::setID(int id) { this->id = id; }
+    void Item::setID(string id) { this->id = id; }
     void Item::setTitle(string title) { this->title = title; }
     void Item::setRentType(Type rentType) {
         if (rentType == Type::Record) {

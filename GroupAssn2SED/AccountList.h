@@ -5,18 +5,22 @@
 #include "Account.h"
 using namespace std;
 
+enum AccountType;
 class AccountList {
 private:
-	vector<string> accountList;
-	int numCopies;
+	vector<Account*> accountList;
+	int numAccount;
 	string filename;
+	AccountType accountType;
 	int id;
 public:
 	AccountList();
 	AccountList(string filename);
-	AccountList(vector<string> accountList, int numCopies, int id);
+	AccountList(vector<Account*> accountList, int numAccount, int id, AccountType accountType);
 	~AccountList();
 	void addAccount(Account* account);
-	void deleteAccount(Account* account);
+	bool updateAccount(Account* account);
+	bool validateAccount(string input);
+	bool promoteAccount(enum AccountType);
 	bool getDatas();
 };

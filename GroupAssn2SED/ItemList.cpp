@@ -16,18 +16,20 @@ ItemList::ItemList(){
 	id = 0;
 }
 
-ItemList::ItemList(vector<Item*> itemList, int id) {
-	this->itemList = {};
+ItemList::ItemList(vector<Item*> itemList, int id, int numItems) {
+	this->itemList = itemList;
 	this->id = id;
+	this->numItems = numItems;
 }
 
 ItemList::~ItemList(){}
 
-vector<Item*> ItemList::addItem(vector<Item*> itemList) {
-
-	return itemList;
+bool ItemList::getDatas() {
+	return true;
 }
 
-bool ItemList::getDatas() {
-
+void ItemList::addItem(Item* item) {
+	this->itemList.push_back(item);
+	this->numItems++;
+	this->id++;
 }

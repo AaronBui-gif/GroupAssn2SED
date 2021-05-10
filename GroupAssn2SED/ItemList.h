@@ -13,14 +13,15 @@ class ItemList {
 public:
 	/*** Declare variables ***/
 	vector<Item*> itemList;
+	int numItems;
 	int id;
 	string filename;
 
 	ItemList(string filename);
 	ItemList();
-	ItemList(vector<Item*> itemList, int id);
+	ItemList(vector<Item*> itemList, int id, int numItems);
 	~ItemList();
-	vector<Item*> addItem(vector<Item*> itemList);
+	void addItem(Item* item);
 	bool getDatas();
 };
 #endif
