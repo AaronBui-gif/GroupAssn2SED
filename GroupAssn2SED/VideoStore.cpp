@@ -8,6 +8,8 @@
 #include <sstream>
 #include <vector>
 #include "Item.h"
+#include "ItemList.h"
+#include "AccountList.h"
 
 using namespace std;
 
@@ -19,6 +21,7 @@ void getOption();
 /*** MAIN FUNCTION ***/
 int main(int argc, char* argv[]) {
     /*** Declare variables ***/
+   
     Item item1;
     if (argc != 3) {
         cout << "Must contain 3 arguments" << endl;
@@ -27,11 +30,8 @@ int main(int argc, char* argv[]) {
 
     string filename1 = argv[1];
     string filename2 = argv[2];
-
-    bool checkFile = getDatas(filename1, item1, filename2);
-    if (checkFile == false) {
-        return -1;
-    }
+    ItemList itemlist(filename1);
+    AccountList accountList(filename2);
 
 
     printMenu();
@@ -43,59 +43,6 @@ bool isNumber(string& num) {
     string::const_iterator it = num.begin();
     while (it != num.end() && isdigit(*it)) ++it;
     return !num.empty() && it == num.end();
-}
-
-/***  FUNCTION to  get datas from file txt ***/
-bool getDatas(string filename, Item item1, string filename2) {
-    string RECORD = "Record";
-    string DVD = "DVD";
-    int count = 0;
-    vector<string>::iterator i;
-    vector< vector<string>> data;
-    ifstream inFile1(filename, ios::in | ios::binary);
-    ifstream inFile2(filename2, ios::in | ios::binary);
-    if (!inFile1) {
-        cerr << "Cannot open file" << endl;
-        return false;
-    }
-    else if (!inFile2) {
-        cerr << "Cannot open file" << endl;
-        return false;
-    }
-    while (inFile2){
-        string s;
-        if (!getline(inFile1, s)) break;
-        cout << s << endl;
-        istringstream stringstream(s);
-        vector<string> record;
-
-        while (stringstream) {
-            string word;
-            if (!getline(stringstream, word, ',')) {
-                count++;
-                if (count == 4) {
-                    if (word == RECORD) {
-                        
-                    }
-                    else if (word == DVD) {
-
-                    }
-                }
-                break;
-            }
-            record.push_back(word);
-
-            //cout << word << endl;
-        }
-        for (i = record.begin(); i < record.end(); i++)
-        {
-            cout << "i:" << *i << endl;
-        }
-    
-        data.push_back(record);
- 
-    }
-    return true;
 }
 
 /*** FUNCTION to print out menu ***/

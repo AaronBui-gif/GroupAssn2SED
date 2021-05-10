@@ -6,6 +6,10 @@
 
 using namespace std;
 
+ItemList::ItemList(string filename) {
+	this->filename = filename;
+}
+
 ItemList::ItemList(){
 	vector<Item*> itemList = {};
 	id = 0;
@@ -23,3 +27,6 @@ vector<Item*> ItemList::addItem(vector<Item*> itemList) {
 	return itemList;
 }
 
+bool ItemList::getDatas() {
+
+}

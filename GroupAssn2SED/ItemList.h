@@ -14,11 +14,13 @@ public:
 	/*** Declare variables ***/
 	vector<Item*> itemList;
 	int id;
+	string filename;
 
-
+	ItemList(string filename);
 	ItemList();
 	ItemList(vector<Item*> itemList, int id);
 	~ItemList();
 	vector<Item*> addItem(vector<Item*> itemList);
+	bool getDatas();
 };
 #endif
