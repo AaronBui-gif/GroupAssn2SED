@@ -10,18 +10,19 @@
 using namespace std;
 
 class ItemList {
-public:
+private:
 	/*** Declare variables ***/
 	vector<Item*> itemList;
 	int numItems;
 	int id;
 	string filename;
-
+public:
 	ItemList(string filename);
 	ItemList();
 	ItemList(vector<Item*> itemList, int id, int numItems);
 	~ItemList();
 	void addItem(Item* item);
 	bool getDatas();
+
 };
 #endif

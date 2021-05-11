@@ -28,7 +28,7 @@ bool ItemList::getDatas() {
 	return true;
 }
 
-void ItemList::addItem(Item* item) {
+ void ItemList::addItem(Item* item) {
 	this->itemList.push_back(item);
 	this->numItems++;
 	this->id++;

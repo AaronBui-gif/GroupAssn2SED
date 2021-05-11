@@ -16,6 +16,7 @@ using namespace std;
 bool isNumber(const string& num);
 bool getDatas(string filename, Item item1, string filename2);
 void printMenu();
+bool getUserInputForAddItem();
 void getOption();
 
 /*** MAIN FUNCTION ***/
@@ -88,112 +89,12 @@ void getOption() {
                     num1 = stoi(input2);
                 }
                 if (input2 == "1") {
-                    string inputID, inputTitle, inputRent, inputLoan;
-                    int inputNumCopies;
-                    float inputFee;
-                    string inputGenre;
-                    Type getRentType;
-                    Genre getGenre;
-                    string inputStatus;
-                    Status getStatus;
-                    cout << "Enter rent type: ";
-                    cin >> inputRent;
-                    cout << endl;
-                    if (inputRent == "record" | inputRent == "Record" || inputRent == "RECORD" || inputRent == "records"| inputRent == "Records" || inputRent == "RECORDS") {
-                        getRentType = Type::Record;
-                    }
-                    else if (inputRent == "dvd" | inputRent == "Dvd" || inputRent == "DVD") {
-                        getRentType = Type::DVD;
-                    }
-                    else if (inputRent == "game" | inputRent == "Game" || inputRent == "GAME") {
-                        getRentType = Type::Game;
+                    bool executeOption1 = getUserInputForAddItem();
+                    if (executeOption1 == true) {
+                        cout << "Add item successfully" << endl;
                     }
                     else {
-                        cout << "Invalid rent input" << endl;
-                        break;
-                    }
-                    if (inputRent == "record" | inputRent == "Record" || inputRent == "RECORD" || inputRent == "records" | inputRent == "Records" || inputRent == "RECORDS" || inputRent == "dvd" | inputRent == "Dvd" || inputRent == "DVD") {
-                        cout << "Enter an id: ";
-                        cin >> inputID;
-                        //if (itemList.validateID(inputID) == true) { 
-                        cout << endl;
-                        cout << "Enter the title: ";
-                        cin >> inputTitle;
-                        cout << endl;
-                        cout << "Enter loan type: ";
-                        cin >> inputLoan;
-                        cout << endl;
-                        cout << "Enter number of copies: ";
-                        cin >> inputNumCopies;
-                        cout << endl;
-                        cout << "Enter rental fee: ";
-                        cin >> inputFee;
-                        cout << endl;
-                        cout << "Enter Genre: ";
-                        cin >> inputGenre;
-                        if (inputGenre == "action" || inputGenre == "Action" || inputGenre == "ACTION") {
-                            getGenre = Genre::Action;
-                        }
-                        else if (inputGenre == "horror" || inputGenre == "Horror" || inputGenre == "HORROR") {
-                            getGenre = Genre::Horror;
-                        }
-                        else if (inputGenre == "drama" || inputStatus == "Drama" || inputStatus == "DRAMA") {
-                            getGenre = Genre::Drama;
-                        }
-                        else if (inputGenre == "comedy" || inputGenre == "Comedy" || inputGenre == "COMEDY") {
-                            getGenre = Genre::Comedy;
-                        }
-                        else {
-                            cout << "Invalid input for genre" << endl;
-                            break;
-                        }
-                        cout << endl;
-                        cout << "Enter rental status: ";
-                        cin >> inputStatus;
-                        if (inputStatus == "available" || inputStatus == "Available" || inputStatus == "AVAILABLE") {
-                            getStatus = Status::AVAILABLE;
-                        }
-                        else if (inputStatus == "borrowed" || inputStatus == "Borrowed" || inputStatus == "BORROWED") {
-                            getStatus = Status::BORROWED;
-                        }
-                        else {
-                            cout << "Invalid input for status" << endl;
-                            break;
-                        }
-                        cout << endl;
-                        itemList.addItem(new Item(inputID, inputTitle, getRentType, inputLoan, inputNumCopies, inputFee, getGenre));
-                    }
-                    else {
-                        cout << "Enter an id: ";
-                        cin >> inputID;
-                        //if (itemList.validateID(inputID) == true) { 
-                        cout << endl;
-                        cout << "Enter the title: ";
-                        cin >> inputTitle;
-                        cout << endl;
-                        cout << "Enter loan type: ";
-                        cin >> inputLoan;
-                        cout << endl;
-                        cout << "Enter number of copies: ";
-                        cin >> inputNumCopies;
-                        cout << endl;
-                        cout << "Enter rental fee: ";
-                        cin >> inputFee;
-                        cout << endl;
-                        cout << "Enter rental status: ";
-                        cin >> inputStatus;
-                        if (inputStatus == "available" || inputStatus == "Available" || inputStatus == "AVAILABLE") {
-                            getStatus = Status::AVAILABLE;
-                        }
-                        else if (inputStatus == "borrowed" || inputStatus == "Borrowed" || inputStatus == "BORROWED") {
-                            getStatus = Status::BORROWED;
-                        }
-                        else {
-                            cout << "Invalid input for status" << endl;
-                            break;
-                        }
-                        cout << endl;
-                        itemList.addItem(new Item(inputID, inputTitle, getRentType, inputLoan, inputNumCopies, inputFee));
+                        cout << "Add item fail" << endl;
                     }
                 }
                 else if (input2 == "2") {
@@ -246,3 +147,88 @@ void getOption() {
     } while (num < 1 && num > 10);
 }
 
+bool getUserInputForAddItem() {
+    string inputID, inputTitle, inputRent, inputLoan;
+    int inputNumCopies;
+    float inputFee;
+    string inputGenre;
+    Type getRentType;
+    Genre getGenre;
+    string inputStatus;
+    Status getStatus;
+    ItemList itemList;
+    cout << "Enter rent type: ";
+    cin >> inputRent;
+    cout << endl;
+    if (inputRent == "record" | inputRent == "Record" || inputRent == "RECORD" || inputRent == "records" | inputRent == "Records" || inputRent == "RECORDS") {
+        getRentType = Type::Record;
+    }
+    else if (inputRent == "dvd" | inputRent == "Dvd" || inputRent == "DVD") {
+        getRentType = Type::DVD;
+    }
+    else if (inputRent == "game" | inputRent == "Game" || inputRent == "GAME") {
+        getRentType = Type::Game;
+    }
+    else {
+        cout << "Invalid rent input" << endl;
+        return false;
+    }
+    if (inputRent == "record" | inputRent == "Record" || inputRent == "RECORD" || inputRent == "records" | inputRent == "Records" || inputRent == "RECORDS" || inputRent == "dvd" | inputRent == "Dvd" || inputRent == "DVD") {
+        cout << "Enter an id: ";
+        cin >> inputID;
+        //if (itemList.validateID(inputID) == true) { 
+        cout << endl;
+        cout << "Enter the title: ";
+        cin >> inputTitle;
+        cout << endl;
+        cout << "Enter loan type: ";
+        cin >> inputLoan;
+        cout << endl;
+        cout << "Enter number of copies: ";
+        cin >> inputNumCopies;
+        cout << endl;
+        cout << "Enter rental fee: ";
+        cin >> inputFee;
+        cout << endl;
+        cout << "Enter Genre: ";
+        cin >> inputGenre;
+        if (inputGenre == "action" || inputGenre == "Action" || inputGenre == "ACTION") {
+            getGenre = Genre::Action;
+        }
+        else if (inputGenre == "horror" || inputGenre == "Horror" || inputGenre == "HORROR") {
+            getGenre = Genre::Horror;
+        }
+        else if (inputGenre == "drama" || inputStatus == "Drama" || inputStatus == "DRAMA") {
+            getGenre = Genre::Drama;
+        }
+        else if (inputGenre == "comedy" || inputGenre == "Comedy" || inputGenre == "COMEDY") {
+            getGenre = Genre::Comedy;
+        }
+        else {
+            cout << "Invalid input for genre" << endl;
+            return false;
+        }
+        cout << endl;
+        itemList.addItem(new Item(inputID, inputTitle, getRentType, inputLoan, inputNumCopies, inputFee, getGenre));
+    }
+    else {
+        cout << "Enter an id: ";
+        cin >> inputID;
+        //if (itemList.validateID(inputID) == true) { 
+        cout << endl;
+        cout << "Enter the title: ";
+        cin >> inputTitle;
+        cout << endl;
+        cout << "Enter loan type: ";
+        cin >> inputLoan;
+        cout << endl;
+        cout << "Enter number of copies: ";
+        cin >> inputNumCopies;
+        cout << endl;
+        cout << "Enter rental fee: ";
+        cin >> inputFee;
+        cout << endl;
+        itemList.addItem(new Item(inputID, inputTitle, getRentType, inputLoan, inputNumCopies, inputFee));
+    }
+    return true;
+}
