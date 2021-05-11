@@ -17,6 +17,7 @@ bool isNumber(const string& num);
 bool getDatas(string filename, Item item1, string filename2);
 void printMenu();
 bool getUserInputForAddItem();
+bool getUserInputForAddAccount();
 void getOption();
 
 /*** MAIN FUNCTION ***/
@@ -37,7 +38,6 @@ int main(int argc, char* argv[]) {
     printMenu();
     getOption();
   
-    
 }
 
 /*** FUNCTION to check if a number ***/
@@ -69,14 +69,17 @@ void printMenu() {
 void getOption() {
     // Declare variables
     ItemList itemList;
+    AccountList accountList;
     string input;
     string input2;
+    string input3;
     int num{};
     int num1{};
-    do {
+    int num2{};
+    while (true) {
         cin >> input;
         if (isNumber(input) == true) {
-           num= stoi(input);
+            num = stoi(input);
         }
         if (input == "1") {
             cout << "1. Add a new item" << endl;
@@ -92,27 +95,53 @@ void getOption() {
                     bool executeOption1 = getUserInputForAddItem();
                     if (executeOption1 == true) {
                         cout << "Add item successfully" << endl;
+                        printMenu();
+                        break;
                     }
                     else {
                         cout << "Add item fail" << endl;
+                        printMenu();
+                        break;
                     }
                 }
                 else if (input2 == "2") {
 
+                    break;
                 }
                 else if (input2 == "3") {
 
+                    break;
                 }
                 else if (input2 == "4") {
                     cout << "Returning to menu" << endl;
                     cout << "*************************************************************************" << endl;
-
+                    printMenu();
                     break;
                 }
             } while (num1 < 1 & num1 > 4);
         }
         else if (input == "2") {
-
+            cout << "1. Add a new account" << endl;
+            cout << "2. Update an account" << endl;
+            do {
+                cin >> input3;
+                if (isNumber(input3) == true) {
+                    num2 = stoi(input3);
+                }
+                if (input3 == "1") {
+                    bool executeOption2 = getUserInputForAddAccount();
+                    if (executeOption2 == true) {
+                        cout << "Add account successfully" << endl;
+                        printMenu();
+                        break;
+                    }
+                    else {
+                        cout << "Add account fail" << endl;
+                        printMenu();
+                        break;
+                    }
+                }
+            } while (num2 < 1 & num2 > 4);
         }
         else if (input == "3") {
 
@@ -133,7 +162,7 @@ void getOption() {
 
         }
         else if (input == "9") {
-
+            accountList.displayAllAccount();
         }
         else if (input == "10") {
 
@@ -144,7 +173,7 @@ void getOption() {
             cout << "*********************************************************************************************************" << endl;
             break;
         }
-    } while (num < 1 && num > 10);
+    }
 }
 
 bool getUserInputForAddItem() {
@@ -230,5 +259,28 @@ bool getUserInputForAddItem() {
         cout << endl;
         itemList.addItem(new Item(inputID, inputTitle, getRentType, inputLoan, inputNumCopies, inputFee));
     }
+    return true;
+}
+
+bool getUserInputForAddAccount() {
+    string id, name, address, phoneNumber, listOfRentals;
+    AccountList accountList;
+    cout << "Enter id for user: ";
+    cin >> id;
+    // validate user ID;
+    cout << endl;
+    cout << "Enter name for user: ";
+    cin >> name;
+    cout << endl;
+    cout << "Enter address for user: ";
+    cin >> address;
+    cout << endl;
+    cout << "Enter phone number for user: ";
+    cin >> phoneNumber;
+    cout << endl;
+    cout << "List of Rentals: ";
+    cin >> listOfRentals;
+    cout << endl;
+    accountList.addAccount(new Account(id, name, address, phoneNumber, listOfRentals));
     return true;
 }

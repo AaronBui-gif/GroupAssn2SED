@@ -46,9 +46,11 @@ Account::~Account() {
     void Account::setPhoneNumber(string phoneNumber) { this->phoneNumber = phoneNumber; }
     void Account::setListOfRentals(string listOfRentals) { this->listOfRentals = listOfRentals; }
 
-
+    string Account::toString() {
+        return "ID: " + this->id + ", name: " + this->name + ", " + this->address + ", " + this->phoneNumber + ", " + this->listOfRentals;
+    }
     // Default Constructor
-    GuessAccount::GuessAccount() {
+    GuestAccount::GuestAccount() {
         id = "";
         name = "";
         address = "";
@@ -56,7 +58,7 @@ Account::~Account() {
         listOfRentals = "";
     }
     // Constructor
-    GuessAccount::GuessAccount(string id, string name, string address, string phoneNumber, string listOfRentals) {
+    GuestAccount::GuestAccount(string id, string name, string address, string phoneNumber, string listOfRentals) {
         this->id = id;
         this->name = name;
         this->address = address;
@@ -64,22 +66,26 @@ Account::~Account() {
         this->listOfRentals = listOfRentals;
     }
     // Deconstructor
-    GuessAccount::~GuessAccount(){}
+    GuestAccount::~GuestAccount(){}
 
 
     // Getter Fuctions
-    string GuessAccount::getID() { return this->id; }
-    string GuessAccount::getName() { return this->name; }
-    string GuessAccount::getAddress() { return this->address; }
-    string GuessAccount::getPhoneNumber() { return this->phoneNumber; }
-    string GuessAccount::getListOfRentals() { return this->listOfRentals; }
+    string GuestAccount::getID() { return this->id; }
+    string GuestAccount::getName() { return this->name; }
+    string GuestAccount::getAddress() { return this->address; }
+    string GuestAccount::getPhoneNumber() { return this->phoneNumber; }
+    string GuestAccount::getListOfRentals() { return this->listOfRentals; }
 
     // Setter Functions
-    void GuessAccount::setID(string id) { this->id = id; }
-    void GuessAccount::setName(string name) { this->name = name; }
-    void GuessAccount::setAddress(string address) { this->address = address; }
-    void GuessAccount::setPhoneNumber(string phoneNumber) { this->phoneNumber = phoneNumber; }
-    void GuessAccount::setListOfRentals(string listOfRentals) { this->listOfRentals = listOfRentals; }
+    void GuestAccount::setID(string id) { this->id = id; }
+    void GuestAccount::setName(string name) { this->name = name; }
+    void GuestAccount::setAddress(string address) { this->address = address; }
+    void GuestAccount::setPhoneNumber(string phoneNumber) { this->phoneNumber = phoneNumber; }
+    void GuestAccount::setListOfRentals(string listOfRentals) { this->listOfRentals = listOfRentals; }
+
+    string GuestAccount::toString() {
+        return "ID: " + this->id + ", name: " + this->name + ", " + this->address + ", " + this->phoneNumber + ", " + this->listOfRentals;
+    }
 
     // class RegularAccount inherits from class AccounT
 
@@ -93,6 +99,10 @@ Account::~Account() {
     }
 
     RegularAccount::~RegularAccount(){}
+
+    string RegularAccount::toString() {
+        return "ID: " + this->id + ", name: " + this->name + ", " + this->address + ", " + this->phoneNumber + ", " + this->listOfRentals;
+    }
 
     VipAccount::VipAccount(){}
 
@@ -119,6 +129,10 @@ Account::~Account() {
     void VipAccount::setAddress(string address) { this->address = address; }
     void VipAccount::setPhoneNumber(string phoneNumber) { this->phoneNumber = phoneNumber; }
     void VipAccount::setListOfRentals(string listOfRentals) { this->listOfRentals = listOfRentals; }
+
+    string VipAccount::toString() {
+        return "ID: " + this->id + ", name: " + this->name + ", " + this->address + ", " + this->phoneNumber + ", " + this->listOfRentals;
+    }
 
 
   

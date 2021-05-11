@@ -35,10 +35,10 @@ public:
     void setPhoneNumber(string phoneNumber);
     void setListOfRentals(string listOfRentals);
 
-    //Function 
+    string toString();
 };
 
-class GuessAccount :public Account {
+class GuestAccount :public Account {
 protected:
     string id;
     string name;
@@ -46,9 +46,9 @@ protected:
     string phoneNumber;
     string listOfRentals;
 public:
-    GuessAccount();
-    GuessAccount(string id, string name, string address, string phoneNumber, string listOfRentals);
-    ~GuessAccount();
+    GuestAccount();
+    GuestAccount(string id, string name, string address, string phoneNumber, string listOfRentals);
+    ~GuestAccount();
     string getID();
     string getName();
     string getAddress();
@@ -61,16 +61,18 @@ public:
     void setAddress(string address);
     void setPhoneNumber(string phoneNumber);
     void setListOfRentals(string listOfRentals);
+
+    string toString();
 };
 
 // class RegularAccount inherits from class Account
 class RegularAccount :public Account {
 protected:
-    string id = 0;
+    string id = "";
     string name = "";
     string address = "";
     string phoneNumber = "";
-    string listOfRentals = 0;
+    string listOfRentals = "";
 public:
     RegularAccount();
     RegularAccount(string id, string name, string address, string phoneNumber, string listOfRentals);
@@ -88,16 +90,18 @@ public:
     void setAddress(string address);
     void setPhoneNumber(string phoneNumber);
     void setListOfRentals(string listOfRentals);
+
+    string toString();
 };
 
 // class VipAccount inherits from class Account
 class VipAccount :public Account {
 protected:
-    string id = 0;
+    string id = "";
     string name = "";
     string address = "";
     string phoneNumber = "";
-    string listOfRentals = 0;
+    string listOfRentals = "";
 public:
     VipAccount();
     VipAccount(string id, string name, string address, string phoneNumber, string listOfRentals);
@@ -115,5 +119,7 @@ public:
     void setAddress(string address);
     void setPhoneNumber(string phoneNumber);
     void setListOfRentals(string listOfRentals);
+
+    string toString();
 };
 #endif //TESTING_ACCOUNT_H
