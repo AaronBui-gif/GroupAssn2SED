@@ -21,8 +21,25 @@ public:
 	ItemList();
 	ItemList(vector<Item*> itemList, int id, int numItems);
 	~ItemList();
+
+	//--Getters--
+	vector<Item*> getItemList();
+	int getNumItem();
+
+	//--Setters--
+	void setItemList(vector<Item*> itemlist);
+	void setNumItem(int itemNum);
+
+	//--Ability to operate with files--
 	void addItem(Item* item);
+	void updateItem();
+	void delItem(int itemPos);
+	void addStockNum();
 	bool getDatas();
 
+	bool searchByID(string id);
+
+	//--Assisting functions--
+	bool isValid(string id);
 };
 #endif
