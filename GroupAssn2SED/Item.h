@@ -1,29 +1,15 @@
-//
-// Created by Huy Bui Thanh on 27/04/2021.
-//
-
 #ifndef TESTING_ITEM_H
 #define TESTING_ITEM_H
 
 #include <iostream>
 #include <string>
-enum Status {
-    AVAILABLE,
-    BORROWED
-};
+enum class Status { AVAILABLE, BORROWED };
 
-enum Type {
-    Record,
-    DVD,
-    Game
-};
+enum class Type { Record, DVD, Game };
 
-enum Genre {
-    Action,
-    Horror,
-    Drama,
-    Comedy
-};
+enum class Genre { Action, Horror, Drama, Comedy };
+
+enum class LoanType { TWO_DAY, ONE_WEEK };
 
 using namespace std;
 
@@ -32,20 +18,20 @@ private:
     string id;
     string title;
     Type rentType;
-    string loanType;
+    LoanType loanType;
     int numberOfCopies;
     float fee;
     Genre genre;
     Status status;
 public:
     Item();
-    Item(string id, string title, Type rentType, string loanType, int numberOfCopies, float fee, Genre genre);
-    Item(string id, string title, Type rentType, string loanType, int numberOfCopies, float fee);
+    Item(string id, string title, Type rentType, LoanType loanType, int numberOfCopies, float fee, Genre genre);
+    Item(string id, string title, Type rentType, LoanType loanType, int numberOfCopies, float fee);
     ~Item();
     string getID();
     string getTitle();
     Type getRentType();
-    string getLoanType();
+    LoanType getLoanType();
     int getNumberOfCopies();
     float getFee();
     Genre getGenre();
@@ -54,7 +40,7 @@ public:
     void setID(string id);
     void setTitle(string title);
     void setRentType(Type rentType);
-    void setLoanType(string loanType);
+    void setLoanType(LoanType loanType);
     void setNumberOfCopies(int numberOfCopies);
     void setFee(float fee);
     void setGenre(Genre genre);

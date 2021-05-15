@@ -33,11 +33,14 @@ public:
 	//--Ability to operate with files--
 	void addItem(Item* item);
 	void updateItem();
-	void delItem(int itemPos);
+	bool delItem(int itemPos);
+	void delItem();
+
+	void modifyStock(int index, int modifyBy);
 	void addStockNum();
 	bool getDatas();
 
-	bool searchByID(string id);
+	int searchByID(string id);
 
 	//--Assisting functions--
 	bool isValid(string id);

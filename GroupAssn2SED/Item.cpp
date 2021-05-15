@@ -1,21 +1,15 @@
-
-//
-// Created by Huy Bui Thanh on 27/04/2021.
-//
-
 #include "Item.h"
 #include<iostream>
 #include<string>
 
 using namespace std;
 
-
 Item::Item() {
 
 }
 
 //
-Item::Item (string id, string title, Type rentType, string loanType, int numberOfCopies, float fee, Genre genre) {
+Item::Item (string id, string title, Type rentType, LoanType loanType, int numberOfCopies, float fee, Genre genre) {
 
     this->id = id;
     this->title = title;
@@ -27,7 +21,7 @@ Item::Item (string id, string title, Type rentType, string loanType, int numberO
     this->status = Status::AVAILABLE;
 }
 
-Item::Item(string id, string title, Type rentType, string loanType, int numberOfCopies, float fee) {
+Item::Item(string id, string title, Type rentType, LoanType loanType, int numberOfCopies, float fee) {
 
     this->id = id;
     this->title = title;
@@ -42,12 +36,12 @@ Item::~Item(){}
     /*** GETTER ***/
     string Item::getID() { return this->id; }
     string Item::getTitle() { return this->title; }
-    Type Item::getRentType() { return rentType; }
-    string Item::getLoanType() { return loanType; }
-    int Item::getNumberOfCopies() { return numberOfCopies; }
-    float Item::getFee() { return fee; }
-    Genre Item::getGenre() { return genre; }
-    Status Item::getStatus() { return status; }
+    Type Item::getRentType() { return this->rentType; }
+    LoanType Item::getLoanType() { return this->loanType; }
+    int Item::getNumberOfCopies() { return this->numberOfCopies; }
+    float Item::getFee() { return this->fee; }
+    Genre Item::getGenre() { return this->genre; }
+    Status Item::getStatus() { return this->status; }
 
     /*** SETTER ***/
     void Item::setID(string id) { this->id = id; }
@@ -56,15 +50,15 @@ Item::~Item(){}
         if (rentType == Type::Record) {
             this->rentType = Type::Record;
         }
-        else if (rentType == Type::Record) {
-            this->rentType = Type::Record;
+        else if (rentType == Type::DVD) {
+            this->rentType = Type::DVD;
         }
         else if (rentType == Type::Game) {
             this->rentType = Type::Game;
         }
     }
 
-    void Item::setLoanType(string loanType) { this->loanType = loanType; }
+    void Item::setLoanType(LoanType loanType) { this->loanType = loanType; }
     void Item::setNumberOfCopies(int numberOfCopies) { this->numberOfCopies = numberOfCopies; }
     void Item::setFee(float fee) { this->fee = fee; }
     void Item::setGenre(Genre genre) { 
