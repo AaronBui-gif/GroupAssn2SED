@@ -143,6 +143,7 @@
     <ClCompile Include="AccountList.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemList.cpp" />
+    <ClCompile Include="Tools.cpp" />
     <ClCompile Include="VideoStore.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -150,6 +151,7 @@
     <ClInclude Include="AccountList.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemList.h" />
+    <ClInclude Include="Tools.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="customers.txt" />

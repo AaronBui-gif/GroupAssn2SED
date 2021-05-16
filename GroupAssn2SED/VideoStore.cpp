@@ -1,286 +1,313 @@
-//
-// Created by Huy Bui Thanh on 27/04/2021.
-//
-
+/*** Libraries ***/
 #include <iostream>
-#include <fstream>
 #include <string>
-#include <sstream>
-#include <vector>
 #include "Item.h"
 #include "ItemList.h"
+#include "Account.h"
 #include "AccountList.h"
 
 using namespace std;
 
-bool isNumber(const string& num);
-bool getDatas(string filename, Item item1, string filename2);
-void printMenu();
-bool getUserInputForAddItem();
-bool getUserInputForAddAccount();
-void getOption();
+/*** Calling functions ***/
+void displayMembers();
+void displayMenu();
+void getOptions(ItemList* itemList, AccountList* accountList);
 
-/*** MAIN FUNCTION ***/
+/*** Main function ***/
 int main(int argc, char* argv[]) {
-    /*** Declare variables ***/
-    Item item1;
-    bool get_datas;
     if (argc != 3) {
-        cout << "Must contain 3 arguments" << endl;
+        cout << "Error input argument. It should contain 3 argument." << endl;
         return -1;
     }
 
-    string filename1 = argv[2];
-    string filename2 = argv[1];
-    ItemList itemlist(filename1);
-    AccountList accountList(filename2);
-    accountList.getDatas();
-    printMenu();
-    getOption();
-  
+    // Create item list file from the command line argument
+    ItemList* itemList = new ItemList(argv[1]);
+
+    // Import items from file
+    //itemList->importItems();
+
+    // Create account list file from the command line argument
+    AccountList* accountList = new AccountList(argv[2]);
+
+    // Import accounts from file
+    //accountList->importAccounts();
+
+    // Call process menu
+    getOptions(itemList, accountList);
+
+    // Delete vectors
+    delete itemList;
+    delete accountList;
+
+    return 0;
 }
 
-/*** FUNCTION to check if a number ***/
-bool isNumber(string& num) {
-    string::const_iterator it = num.begin();
-    while (it != num.end() && isdigit(*it)) ++it;
-    return !num.empty() && it == num.end();
+/*** Function to exit program and display group members ***/
+void displayMembers() {
+    cout << "Closing Genie's video store app" << endl << "Good bye!!!" << endl;
+    cout << "*************************************************" << endl;
+    cout << "ASSIGNMENT 2 GROUP 3" << endl;
+    cout << "s3740934, s3740934@rmit.edu.vn, Huy, Bui Thanh" << endl;
+    cout << "s3764704, s3764704@rmit.edu.vn, Hoang, Nguyen Huy" << endl;
+    cout << "s3795370, s3795370@rmit.edu.vn, Dung, Ho Minh" << endl;
+    cout << "s3799602, s3799602@rmit.edu.vn, Tri, Lai Nghiep" << endl;
+    cout << "s3879052, s3879052@rmit.edu.vn, Long, Nguyen Dich" << endl;
+    cout << "*************************************************" << endl;
 }
 
-/*** FUNCTION to print out menu ***/
-void printMenu() {
-    cout << endl << "******************************" << endl
-        << "Welcome to Genie’s video store" << endl
-        << "Enter an option below." << endl
-        << "1.Add a new item, update or delete an existing item" << endl
-        << "2.Add new customer or update an existing customer" << endl
-        << "3.Promote an existing customer" << endl
-        << "4.Rent an item" << endl
-        << "5.Return an item" << endl
-        << "6.Display all items" << endl
-        << "7.Display out-of-stock items" << endl
-        << "8.Display all customers" << endl
-        << "9.Display group of customers" << endl
-        << "10.Search items or customers" << endl
-        << "Exit." << endl;
+/*** Function to display menu in command window ***/
+void displayMenu() {
+    cout << "********************************" << endl;
+    cout << "Welcome to Genie's video store" << endl;
+    cout << "Enter an option below." << endl;
+    cout << "1. Add a new item" << endl;
+    cout << "2. Update an existing item" << endl;
+    cout << "3. Delete an existing item" << endl;
+    cout << "4. Add new customer" << endl;
+    cout << "5. Add new customer" << endl;
+    cout << "6. Update an existing customer" << endl;
+    cout << "7. Promote an existing customer" << endl;
+    cout << "8. Rent an item" << endl;
+    cout << "9. Return an item" << endl;
+    cout << "10. Display all items sort by ID" << endl;
+    cout << "11. Display all items sort by name" << endl;
+    cout << "12. Display out-of-stock items" << endl;
+    cout << "13. Display all customers sort by ID" << endl;
+    cout << "14. Display all customers sort by name" << endl;
+    cout << "15. Display guest customers" << endl;
+    cout << "16. Display regular customers" << endl;
+    cout << "17. Display VIP customers" << endl;
+    cout << "18. Search items or customers" << endl;
+    cout << "Exit" << endl << endl;
 }
 
-/*** FUNCTION to get input option from the user ***/
-void getOption() {
-    // Declare variables
-    ItemList itemList;
-    AccountList accountList;
-    string input;
-    string input2;
-    string input3;
-    int num{};
-    int num1{};
-    int num2{};
+/*** Function to process menu ***/
+void getOptions(ItemList* itemList, AccountList* accountList) {
+    /*** Declare variables ***/
+    string input = "";
+
     while (true) {
-        cin >> input;
-        if (isNumber(input) == true) {
-            num = stoi(input);
+        /*** Display Menu ***/
+        displayMenu();
+
+        /*** Get user input ***/
+        cout << "Select: ";
+        getline(cin, input);
+
+
+        if (input.compare("1") == 0) {
+            itemList->addItem();
         }
-        if (input == "1") {
-            cout << "1. Add a new item" << endl;
-            cout << "2. Update an item" << endl;
-            cout << "3. Delete an item" << endl;
-            cout << "4. Return to menu" << endl;
-            do {
-                cin >> input2;
-                if (isNumber(input2) == true) {
-                    num1 = stoi(input2);
-                }
-                if (input2 == "1") {
-                    bool executeOption1 = getUserInputForAddItem();
-                    if (executeOption1 == true) {
-                        cout << "Add item successfully" << endl;
-                        printMenu();
-                        break;
-                    }
-                    else {
-                        cout << "Add item fail" << endl;
-                        printMenu();
-                        break;
-                    }
-                }
-                else if (input2 == "2") {
 
-                    break;
-                }
-                else if (input2 == "3") {
+        // If input is 2: Update an existing item
+        else if (input.compare("2") == 0) {
+            itemList->updateItem();
+        }
 
-                    break;
+        // If input is 3: Delete an existing item
+        else if (input.compare("3") == 0) {
+            itemList->delItem();
+        }
+
+        // If input is 4: Increase number of stocks of existing items
+        else if (input.compare("4") == 0) {
+            itemList->addStockNum();
+        }
+
+        // If input is 5: Add new customer
+        else if (input.compare("5") == 0) {
+            //accountList->addAccount();
+        }
+
+        // If input is 6: Update an existing customer
+        else if (input.compare("6") == 0) {
+            //accountList->updateAccount();
+        }
+
+        // If input is 7: Promote an existing customer
+        else if (input.compare("7") == 0) {
+            //accountList->promote();
+        }
+
+        // If input is 8: Rent an item
+        else if (input.compare("8") == 0) {
+            //accountList->borrowedItem(itemList);
+        }
+
+        // If input is 9: Return an item
+        else if (input.compare("9") == 0) {
+            //accountList->returnedItem(itemList);
+        }
+
+        // If input is 10: Display all items sort by ID
+        else if (input.compare("10") == 0) {
+            cout << endl;
+            itemList->sortID();
+            itemList->displayAll();
+        }
+
+        // If input is 11: Display all items sort by title
+        else if (input.compare("11") == 0) {
+            cout << endl;
+            itemList->sortTitle();
+            itemList->displayAll();
+        }
+
+        // If input is 12: Display out-of-stock items
+        else if (input.compare("12") == 0) {
+            //cout << endl;
+            //itemList->displayOutOfStockItems();
+        }
+
+        // If input is 13: Display all customers sort by ID
+        else if (input.compare("13") == 0) {
+            //cout << endl;
+            //accountList->sortID();
+            //accountList->displayGuests();
+            //accountList->displayRegulars();
+            //accountList->displayVIPs();
+        }
+
+        // If input is 14: Display all customers sort by name
+        else if (input.compare("14") == 0) {
+            //cout << endl;
+            //accountList->sortName();
+            //accountList->displayGuests();
+            //accountList->displayRegulars();
+            //accountList->displayVIPs();
+        }
+
+        // If input is 15: Display guest customers
+        else if (input.compare("15") == 0) {
+            //cout << endl;
+            //accountList->displayGuests();
+        }
+
+        // If input is 16: Display regular customers
+        else if (input.compare("16") == 0) {
+            //cout << endl;
+            //accountList->displayRegulars();
+        }
+
+        // If input is 17: Display VIP customers
+        else if (input.compare("17") == 0) {
+            //cout << endl;
+            //accountList->displayVIPs();
+        }
+
+        // If input is 18: Search items or customers
+        else if (input.compare("18") == 0) {
+
+            // Enter selection to search items or customers
+            while (true) {
+                cout << endl << "Enter an option below to search items or customers." << endl;
+                cout << "1. Search items" << endl;
+                cout << "2. Search customers" << endl;
+                cout << "3. Return to menu" << endl;
+
+                /*** Get user input ***/
+                cout << "Select: ";
+                getline(cin, input);
+
+                // If input = 1: Search items
+                if (input.compare("1") == 0) {
+                    while (true) {
+                        // Enter selection to search by ID or title
+                        cout << endl << "Enter an option below to search by ID or title." << endl;
+                        cout << "1. Search by ID" << endl;
+                        cout << "2. Search by title" << endl;
+                        cout << "3. Return to menu" << endl;
+
+                        // Get user input
+                        cout << "Select: ";
+                        getline(cin, input);
+
+                        // If input = 1: Search by ID
+                        if (input.compare("1") == 0) {
+                            /*itemList->displaysearchID();
+                            break;*/
+                        }
+                        // If input = 1: Search by title
+                        else if (input.compare("2") == 0) {
+                           /* itemList->displaysearchTitle();
+                            break;*/
+                        }
+                        else if (input.compare("3") == 0) {
+                            cout << "Returning to menu " << endl;
+                            cout << "**********************************************" << endl;
+                            break;
+                        }
+                        else {
+                            cout << "Invalid search category selection." << endl;
+                            continue;
+                        }
+                    }
                 }
-                else if (input2 == "4") {
+
+                // If input = 2: Search accounts
+                else if (input.compare("2") == 0) {
+                    while (true) {
+                        cout << endl << "Enter an option below to search by ID or title." << endl;
+                        cout << "1. Search by ID" << endl;
+                        cout << "2. Search by name" << endl;
+                        cout << "3. Return to menu" << endl;
+
+                        // Get user input
+                        cout << "Select: ";
+                        getline(cin, input);
+
+                        // If input = 1: Search by ID
+                        if (input.compare("1") == 0) {
+                            //accountList->displaysearchID();
+                            break;
+                        }
+
+                        // If input = 2: Search by name
+                        else if (input.compare("2") == 0) {
+                            //accountList->displaysearchName();
+                            break;
+                        }
+
+                        // If input = 3: Return to menu
+                        else if (input.compare("3") == 0) {
+                            cout << "Returning to menu" << endl;
+                            cout << "***************************************" << endl;
+                            break;
+                            break;
+                        }
+
+                        // Others are error
+                        else {
+                            cout << "Input is incorrect. Please enter again" << endl;
+                            continue;
+                        }
+                    }
+                }
+
+                // If input = 3: Return to menu
+                else if ((input.compare("3") == 0)) {
                     cout << "Returning to menu" << endl;
-                    cout << "*************************************************************************" << endl;
-                    printMenu();
+                    cout << "*************************" << endl;
                     break;
                 }
-            } while (num1 < 1 & num1 > 4);
-        }
-        else if (input == "2") {
-            cout << "1. Add a new account" << endl;
-            cout << "2. Update an account" << endl;
-            do {
-                cin >> input3;
-                if (isNumber(input3) == true) {
-                    num2 = stoi(input3);
+
+                // Others are error
+                else {
+                    cout << "Invalid input. Please enter again" << endl;
+                    continue;
                 }
-                if (input3 == "1") {
-                    bool executeOption2 = getUserInputForAddAccount();
-                    if (executeOption2 == true) {
-                        cout << "Add account successfully" << endl;
-                        printMenu();
-                        break;
-                    }
-                    else {
-                        cout << "Add account fail" << endl;
-                        printMenu();
-                        break;
-                    }
-                }
-            } while (num2 < 1 & num2 > 4);
+            }
         }
-        else if (input == "3") {
 
-        }
-        else if (input == "4") {
-
-        }
-        else if (input == "5") {
-
-        }
-        else if (input == "6") {
-
-        }
-        else if (input == "7") {
-
-        }
-        else if (input == "8") {
-
-        }
-        else if (input == "9") {
-            accountList.displayAllAccount();
-        }
-        else if (input == "10") {
-
-        }
-        else if (input == "Exit" || input == "exit") {
-            cout << "Closing Genie's video store app" << endl;
-            cout << "Good Bye" << endl;
-            cout << "*********************************************************************************************************" << endl;
+        // If user input Exit
+        else if (input == "Exit" || input == "exit" || input == "EXIT") {
+            displayMembers();
             break;
         }
-    }
-}
 
-bool getUserInputForAddItem() {
-    string inputID, inputTitle, inputRent, inputLoan;
-    int inputNumCopies;
-    float inputFee;
-    string inputGenre;
-    Type getRentType;
-    Genre getGenre;
-    string inputStatus;
-    Status getStatus;
-    ItemList itemList;
-    cout << "Enter rent type: ";
-    cin >> inputRent;
-    cout << endl;
-    if (inputRent == "record" | inputRent == "Record" || inputRent == "RECORD" || inputRent == "records" | inputRent == "Records" || inputRent == "RECORDS") {
-        getRentType = Type::Record;
-    }
-    else if (inputRent == "dvd" | inputRent == "Dvd" || inputRent == "DVD") {
-        getRentType = Type::DVD;
-    }
-    else if (inputRent == "game" | inputRent == "Game" || inputRent == "GAME") {
-        getRentType = Type::Game;
-    }
-    else {
-        cout << "Invalid rent input" << endl;
-        return false;
-    }
-    if (inputRent == "record" | inputRent == "Record" || inputRent == "RECORD" || inputRent == "records" | inputRent == "Records" || inputRent == "RECORDS" || inputRent == "dvd" | inputRent == "Dvd" || inputRent == "DVD") {
-        cout << "Enter an id: ";
-        cin >> inputID;
-        //if (itemList.validateID(inputID) == true) { 
-        cout << endl;
-        cout << "Enter the title: ";
-        cin >> inputTitle;
-        cout << endl;
-        cout << "Enter loan type: ";
-        cin >> inputLoan;
-        cout << endl;
-        cout << "Enter number of copies: ";
-        cin >> inputNumCopies;
-        cout << endl;
-        cout << "Enter rental fee: ";
-        cin >> inputFee;
-        cout << endl;
-        cout << "Enter Genre: ";
-        cin >> inputGenre;
-        if (inputGenre == "action" || inputGenre == "Action" || inputGenre == "ACTION") {
-            getGenre = Genre::Action;
+        // If user input is empty
+        else if (input.empty()) {
+            cout << "Input cannot be empty. Please enter again." << endl;
         }
-        else if (inputGenre == "horror" || inputGenre == "Horror" || inputGenre == "HORROR") {
-            getGenre = Genre::Horror;
-        }
-        else if (inputGenre == "drama" || inputStatus == "Drama" || inputStatus == "DRAMA") {
-            getGenre = Genre::Drama;
-        }
-        else if (inputGenre == "comedy" || inputGenre == "Comedy" || inputGenre == "COMEDY") {
-            getGenre = Genre::Comedy;
-        }
-        else {
-            cout << "Invalid input for genre" << endl;
-            return false;
-        }
-        cout << endl;
-        itemList.addItem(new Item(inputID, inputTitle, getRentType, inputLoan, inputNumCopies, inputFee, getGenre));
     }
-    else {
-        cout << "Enter an id: ";
-        cin >> inputID;
-        //if (itemList.validateID(inputID) == true) { 
-        cout << endl;
-        cout << "Enter the title: ";
-        cin >> inputTitle;
-        cout << endl;
-        cout << "Enter loan type: ";
-        cin >> inputLoan;
-        cout << endl;
-        cout << "Enter number of copies: ";
-        cin >> inputNumCopies;
-        cout << endl;
-        cout << "Enter rental fee: ";
-        cin >> inputFee;
-        cout << endl;
-        itemList.addItem(new Item(inputID, inputTitle, getRentType, inputLoan, inputNumCopies, inputFee));
-    }
-    return true;
-}
-
-bool getUserInputForAddAccount() {
-    string id, name, address, phoneNumber, listOfRentals;
-    AccountList accountList;
-    cout << "Enter id for user: ";
-    cin >> id;
-    // validate user ID;
-    cout << endl;
-    cout << "Enter name for user: ";
-    cin >> name;
-    cout << endl;
-    cout << "Enter address for user: ";
-    cin >> address;
-    cout << endl;
-    cout << "Enter phone number for user: ";
-    cin >> phoneNumber;
-    cout << endl;
-    cout << "List of Rentals: ";
-    cin >> listOfRentals;
-    cout << endl;
-    accountList.addAccount(new Account(id, name, address, phoneNumber, listOfRentals));
-    return true;
 }
