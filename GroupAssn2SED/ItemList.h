@@ -45,7 +45,7 @@ public:
 	bool getDatas();
 
 	//3. Search methods
-	int searchByID(string id);
+	int searchID(string id);
 
 	//4. Sorting methods
 	void sortID();

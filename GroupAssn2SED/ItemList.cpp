@@ -297,7 +297,7 @@ void ItemList::updateItem() {
 		}
 
 		//Locating to the exact item
-		itemIndex = this->searchByID(input);
+		itemIndex = this->searchID(input);
 
 		//If ID exist in the items.txt
 		if (itemIndex == -1) {
@@ -553,7 +553,7 @@ void ItemList::delItem() {
 		}
 
 		//Locating to the exact item
-		itemIndex = this->searchByID(input);
+		itemIndex = this->searchID(input);
 
 		//In case ID not exist
 		if (itemIndex == -1) {
@@ -657,7 +657,7 @@ void ItemList::addStockNum() {
 		}
 
 		//Locating to the exact item
-		itemIndex = this->searchByID(input);
+		itemIndex = this->searchID(input);
 
 		//In case ID not exist
 		if (itemIndex == -1) {
@@ -762,7 +762,7 @@ void ItemList::displayAll() {
 }
 
 //--Search by ID--
-int ItemList::searchByID(string id) {
+int ItemList::searchID(string id) {
 	vector<Item*> tempItemList = this->getItemList();
 	int num = this->getNumItem();
 
