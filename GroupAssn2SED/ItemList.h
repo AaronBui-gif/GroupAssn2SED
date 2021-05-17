@@ -45,8 +45,7 @@ public:
 	bool getDatas();
 
 	//3. Search methods
-	int searchByID(string id);
-	vector<int> searchByTitle(string title);
+	int searchID(string id);
 
 	//4. Sorting methods
 	void sortID();
@@ -54,11 +53,6 @@ public:
 
 	//5. Display and search methods
 	void displayAll();
-	void displayAvailable();
-	void displayOutOfStock();
-	void displaySearchByID();
-	void displaySearchByTitle();
-
 
 	//--Assisting functions--
 	bool isValid(string id);
