@@ -14,6 +14,7 @@ ItemList::ItemList(string filename) {
 
 ItemList::ItemList(){
 	vector<Item*> itemList = {};
+	this->numItems = 0;
 	id = 0;
 }
 
@@ -756,9 +757,38 @@ void ItemList::displayAll() {
 	
 	// Iterate over list
 	for (Item* i : tempItemList) i->displayAllItems();
-	cout << endl;
+	cout << "-------------------------" << endl;
+}
 
-	return;
+//--Display available items--
+void ItemList::displayAvailable() {
+	cout << "Available items in stock: " << endl;
+
+	// List of item
+	vector<Item*> items = this->getItemList();
+
+	for (Item* i : items) {
+		// If item has more than 0 copies
+		if (i->getStock() > 0) i->displayAllItems();
+
+		// Else skip to next item
+		else continue;
+	}
+	cout << "-------------------------" << endl;
+}	
+
+//--Display out of stock items--
+void ItemList::displayOutOfStock() {
+	cout << "Out-of-stock items: " << endl;
+
+	// List of item
+	vector<Item*> items = this->getItemList();
+
+	for (Item* i : items) {
+		if (i->getStock() == 0) i->displayAllItems(); // If current item has no copies in stock
+		else continue; // Skip to next item
+	}
+	cout << "-------------------------" << endl;
 }
 
 //--Search by ID--
@@ -773,19 +803,42 @@ int ItemList::searchByID(string id) {
 	return -1;
 }
 
+// Return index of the item in vector of item*
+vector<int> ItemList::searchByTitle(string title) {
+	vector<Item*> tempItemList = this->getItemList();
+
+	// Get total number of items in item list
+	int size = this->getNumItem();
+	// Create a vector of dices
+	vector<int> indices;
+
+	// Iterate over account list 
+	for (int i = 0; i < size; i++) {
+		size_t found = toLowerCase(tempItemList[i]->getTitle()).find(toLowerCase(title));
+		// Ignore case and find if the current item title contains given title
+		if (found != string::npos) indices.push_back(i); // Add current index to vector of indices
+			
+	}
+
+	// Return -1 if item cannot be found
+	if (indices.size() == 0) indices.push_back(-1);
+
+	return indices;
+}
+
 //--Sort by ID--
 void ItemList::sortID() {
 	vector<Item*> tempItemList = this->getItemList();
 
 	// Get total number of items in item list
-	int size = this->getNumItem();
+	size_t size = this->getNumItem();
 
 	// Create a temp pointer for swapping
 	Item* temp{};
 
 	// Implement bubble sort
-	for (int i = 0; i < size - 1; i++) {
-		for (int j = 0; j < size - i - 1; j++) {
+	for (size_t i = 0; i < (size - 1); i++) {
+		for (size_t j = 0; j < size - i - 1; j++) {
 			if (tempItemList[j]->getID() > tempItemList[j + 1]->getID()) {
 				// Swap positions of 2 items
 				temp = tempItemList[j];
@@ -804,14 +857,14 @@ void ItemList::sortTitle() {
 	vector<Item*> tempItemList = this->getItemList();
 
 	// Get total number of items in item list
-	int size = this->getNumItem();
+	size_t size = this->getNumItem();
 
 	// Create a temp pointer for swapping
 	Item* temp{};
 
 	// Implement bubble sort
-	for (int i = 0; i < size - 1; i++) {
-		for (int j = 0; j < size - i - 1; j++) {
+	for (size_t i = 0; i < (size - 1); i++) {
+		for (size_t j = 0; j < size - i - 1; j++) {
 			if (convertLower(tempItemList[j]->getTitle()) > convertLower(tempItemList[j + 1]->getTitle())) {
 				// Swap positions of 2 items
 				temp = tempItemList[j];
@@ -823,6 +876,83 @@ void ItemList::sortTitle() {
 
 	// Update the ItemList
 	this->setItemList(tempItemList);
+}
+
+//--Display results search for ID--
+void ItemList::displaySearchByID() {
+	vector<Item*> tempItemList = this->getItemList();
+	string input = "";
+	int index = 0;
+
+	while (true) {
+		cout << "-------------\nEnter Item's ID to search: ";
+		getline(cin, input);
+
+		// Check if input is not empty
+		if (input.empty()) {
+			cerr << "Error: IDs cannot be empty!" << endl;
+			continue;
+		}
+
+		//ID validation
+		if (!this->isValid(input)) {
+			cerr << "Error: ID must follow the format Ixxx-yyyy." << endl;
+			continue;
+		}
+
+		// Search index of item in list
+		index = this->searchByID(input);
+
+		// If item not found
+		if (index == -1) {
+			cerr << "Error: Item not found!" << endl;
+			continue;
+		}
+
+		// If item is found
+		else {
+			cout << "Search result: ";
+			tempItemList[index]->displayAllItems();
+			cout << "\n-------------------------" << endl;
+			break;
+		}
+	}
+}
+
+//--Display results search for Title--
+void ItemList::displaySearchByTitle() {
+	// Create a copy of vector item*
+	vector<Item*> tempItemList = this->getItemList();
+	string input = "";
+
+	while (true) {
+		cout << "-------------\nEnter item's title to search: ";
+		getline(cin, input);
+
+		// Check if input is empty
+		if (input.empty()) {
+			cerr << "Error: Title cannot be empty!" << endl;
+			continue;
+		}
+
+		// Get indices from search by title
+		vector<int> searchIndices = this->searchByTitle(input);
+
+		// If title cannot be found
+		if (searchIndices[0] == -1) {
+			cerr << "Error: This item title cannot be found!" << endl;
+			continue;
+		}
+		else {
+			// Print search results
+			cout << "Search results: ";
+
+			// Print search result based on the search indices
+			for (int i = 0; i < searchIndices.size(); i++) tempItemList[searchIndices[i]]->displayAllItems();
+			break;
+		}
+	}
+	cout << "\n-------------------------" << endl;
 }
 
 //========================Assisting functions==============================

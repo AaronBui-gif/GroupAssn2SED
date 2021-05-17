@@ -210,38 +210,39 @@ void getOptions(ItemList* itemList, AccountList* accountList) {
                 getline(cin, input);
 
                 // If input = 1: Search items
-                if (input.compare("1") == 0) {
-                    while (true) {
+                if (input == "1")
+                {
+                    while (true)
+                    {
                         // Enter selection to search by ID or title
-                        cout << endl << "Enter an option below to search by ID or title." << endl;
-                        cout << "1. Search by ID" << endl;
-                        cout << "2. Search by title" << endl;
-                        cout << "3. Return to menu" << endl;
+                        cout << "Enter an option below to search by ID or title." << endl
+                            << "1. Search by ID" << endl
+                            << "2. Search by title" << endl;
 
-                        // Get user input
-                        cout << "Select: ";
                         getline(cin, input);
 
                         // If input = 1: Search by ID
-                        if (input.compare("1") == 0) {
-                            /*itemList->displaysearchID();
-                            break;*/
-                        }
-                        // If input = 1: Search by title
-                        else if (input.compare("2") == 0) {
-                           /* itemList->displaysearchTitle();
-                            break;*/
-                        }
-                        else if (input.compare("3") == 0) {
-                            cout << "Returning to menu " << endl;
-                            cout << "**********************************************" << endl;
+                        if (input == "1")
+                        {
+                            itemList->displaySearchByID();
                             break;
                         }
-                        else {
-                            cout << "Invalid search category selection." << endl;
+
+                        // If input = 2: Search by title
+                        if (input == "2")
+                        {
+                            itemList->displaySearchByTitle();
+                            break;
+                        }
+
+                        else
+                        {
+                            cout << "Error: Invalid search category selection!" << endl;
                             continue;
                         }
+
                     }
+                    break;
                 }
 
                 // If input = 2: Search accounts
